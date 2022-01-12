@@ -1,0 +1,64 @@
+#задание 1
+
+#1
+tuplex = [(4, 6, 2, 8, 3, 1)]
+print(tuplex)
+s = list(tuplex[0])
+print(tuplex)
+s.append(9)
+print(tuplex)
+tuplex = tuple(tuplex)
+print(s)
+# 2 
+tuplex = [(4, 6, 2, 8, 3, 1)]
+s = list(tuplex[0])
+s.append(123)
+tuplex = tuple(tuplex)
+print(s)
+
+#задание 2
+tuplex = [(10, 20, 40), (40, 50, 60), (70, 80, 90)]
+a = list(tuplex[0])
+a[2] = 100
+print(a)
+
+#задание 3
+num = [(), (), ('',), ('a', 'b'), ('a', 'b', 'c'), ('d',)]
+while () in num:
+    num.remove(())
+    print(num)
+    
+#задание 4
+#1
+num = (1,2,3)
+for i in num:
+  print(i, end='')
+  
+ #2
+ num = (10,20,40,5,70)
+ for i in num:
+     print(i, end='')
+     
+#задание 5    
+num = -576576123
+ty = num
+if num > 0:
+    num = str(num)
+    t = len(num)
+    print(num)
+else:
+    num = -num
+    num = str(num)
+    t = len(num)
+    print(num)
+
+w = 0
+q = 0
+while q < t:
+    w = w + int(num[q])*(10**q)
+    q += 1
+if int(ty) > 0:
+    print(w)
+else:
+    print(-w)
+  
