@@ -1,0 +1,93 @@
+set1 = {10, 20, 30, 40, 50}
+set2 = {60, 70, 80, 20, 10}
+
+print(set1.intersection(set2))
+
+sum = 0
+for num in set1.intersection(set2):
+    sum = sum + num
+
+print(sum)
+
+set1 = {10, 20, 30, 40, 50}
+set2 = {30, 40, 50, 60, 70}
+print(set1.intersection(set2))
+print(set1.intersection_update(set2))
+
+print(set1)
+
+set1 = {10, 20, 30, 40, 50}
+set2 = {30, 40, 50, 60, 70}
+print(set1.symmetric_difference(set2))
+
+
+#1 
+dict={}
+keys_list = {'Ten', 'Twenty', 'Thirty',}
+values_list = [10, 20, 30]
+i = 0
+for x in keys_list:
+  dict[x] = values_list[i]
+  i += 1
+print(dict)
+
+
+#2
+data = {}
+data1 = []
+print("1.Зарегистрировать\n2.Удалить студента\n3.Список студентов\n4.Завершить" )
+g1 = int(input(">>> "))
+
+
+def validation_username(username, method):
+    if method == 1:
+        status = True
+        for x in data1:
+            if x['username'] == username:
+                print('такой юзер с этим username уже имеентся\nВведите другой username')
+                status = False
+                break
+        return status
+    elif method == 2:
+        data_user = None
+        for x in data1:
+            if x['username'] == username:
+                data_user = x
+                break
+        return data_user
+
+
+while True:
+    if g1 == 1:
+        valid = None
+        a = input("name: ")
+        b = input("age: ")
+        c = input("address: ")
+        for x in range(0, 3):
+            d = input("username: ")
+            valid = validation_username(d, 1)
+            if valid:
+                break
+        if valid:
+            data['name'] = a
+            data['age'] = b
+            data['address'] = c
+            data['username'] = d
+            data1.append(data)
+        # print(data1)
+        g1 = int(input(">>> "))
+    elif g1 == 2:
+        d = input("username: ")
+        info = validation_username(d, 2)
+        if info is not None:
+            data1.remove(info)
+        g1 = input(">>> ")
+    elif g1 == 3:
+        print(data1)
+        g1 = int(input(">>> "))
+    elif g1 == 4:
+        print("Завершено ")
+        break
+    else:
+        print('Выводите сверху перечисленные цифры !')
+        g1 = int(input(">>> "))
