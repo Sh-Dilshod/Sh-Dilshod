@@ -1,0 +1,115 @@
+#1. Создайте класс Python с именем Circle, который состоит из двух методов и переменного для радиуса окружности.
+# Переменную вводит пользователь, затем выбирает один из двух доступных методов: вычисление площади, периметра
+
+class Circle():
+    def __init__(self, radius):
+        self.radius = radius
+
+    def b(self):
+        return 3.14 * (self.radius ** 2)
+
+    def c(self):
+        return 2 * 3.14 * self.radius
+
+a = int(input(">> "))
+abc = Circle(a)
+print("Площадь круга:", abc.b(),)
+print("Длина окружность:", abc.c())
+
+# 2. Создайте класс - Employee.
+#У класса имеются методы для повышения зарплаты, вывода всей информации о пользователе,
+# которая была введена пользователем(имя, должность, возраст, зарплата).
+# Создайте класс - Manager, который наследует salary. Перезапишите функцию повышения зарплаты, менеджера.
+# Зарплата менеджера повышается на плюс 10%, по сравнению с классом Employee.
+class Employee():
+    def __init__(self, name, position, age, salary):
+        self.name = name
+        self.position = position
+        self.age = age
+        self.salary = salary
+
+    def information(self):
+        print('Miko','david', 20, 1500)
+
+    def increace(self):
+        print(self.salary)
+        self.salary = self.salary + self.salary * 0.1
+        print(self.salary)
+
+class Manager(Employee):
+    def increace(self):
+        print(self.salary)
+        self.salary = self.salary * 1.2
+        print(self.salary)
+
+Miko = Employee('Mike', 'Employee', 20, 1500)
+dishka = Manager('dishka', 'Manager', 25, 30000)
+
+Miko.information()
+Miko.increace()
+
+class Bankomat():
+    def __init__(self,balans = 0.0, vnest = 0, snyatt = 0, otpp =0):
+        self.balans = balans
+        self.vnest = vnest
+        self.snyatt = snyatt
+        self.otpp = otpp
+    def vnesti(self):
+        self.vnest = float(input("Введите сумму для депозита:"))
+        self.balans = self.balans + self.vnest
+        #### self.balans += self.vnest
+        print(f"Внесенная сумма:{self.vnest}")
+
+    def snyat(self):
+        self.snyatt = float(input('Введите сумму для сняте:'))
+        if self.balans > self.snyatt:
+            self.balans -= self.snyatt
+            print(f"Вы сняли такую сумму: {self.snyatt} ")
+
+        else:
+            self.balans -= self.snyatt
+            print(f"Вам не хватает:{-self.balans}")
+            self.balans += self.snyatt
+
+    def otp(self,):
+        karta = int(input('Введите Банковский аккаунт получателя карты:' ))
+        self.otpp = float(input('Введите сумму для отпр:'))
+        if self.balans > self.otpp:
+            self.balans -= self.otpp
+            print(f"Вы отпр такую сумму:{self.otpp} ")
+
+
+
+        else:
+            self.balans -= self.otpp
+            print(f"Вам не хватает: {-self.balans}")
+            self.balans += self.otpp
+
+
+#3
+a = Bankomat()
+while True:
+    print("""1. просмотр баланса
+2. внесение денег
+3. снятие денег
+4.отправка денег
+5.завершить операцию """)
+    b = int(input(">>:"))
+    if b == 1:
+        print(f"Текущий баланс = {a.balans}")
+
+    elif b == 2:
+        a.vnesti()
+
+    elif b == 3:
+        a.snyat()
+
+    elif b == 4:
+        a.otp()
+
+    elif b == 5:
+        print("Спасибо за выбор банкомат Gdragon")
+        break
+
+    else:
+        continue
