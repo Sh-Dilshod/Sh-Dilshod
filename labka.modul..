@@ -1,0 +1,166 @@
+## 1. Напишите программу Python,
+## в котором если пользователь вводит буквы или числа и буквы в перемешку, которая сообщает пользователю,
+##что это не число. Когда пользователь вводит число программа останавливается
+
+try:
+    number_list = []
+    number = int(input('Ввидете цифру: '))
+    number_list.append(number)
+    print(number_list)
+
+except:
+    print('Ввидите цифру!')
+
+else:
+    print('Вы правильно набрали цифру !')
+
+finally:
+    print('Завершенно!')
+
+## 2. Напишите программу Python,
+## которая принимает текстовый файл в качестве входных данных и возвращает количество слов в заданном текстовом файле.
+## Примечание. Некоторые слова можно разделять запятой без пробела.
+
+try:
+    abcd = input(">> ")
+    print(abcd.count(' ') + 1)
+
+    my_file = open('name.txt', 'w', encoding="utf-8")
+    my_string = abcd + ' '
+    my_file.write(my_string)
+    my_file.close()
+
+    my_file = open('name.txt', 'r')
+    print(my_file.read())
+    my_file.close()
+
+except:
+    print('Ввидите букву!')
+
+else:
+    print('Программа работает верно!')
+
+finally:
+    print('Завершенно!')
+
+## 3. Напишите программу Python,
+## которая открывает файл с фотографией и создаёт новый файл с тем же рисунком, но с другим названием.
+
+import shutil
+shutil.copyfile("IMG_20210612_212427_306.jpg", "IMG_20210612_212427_30633.jpg")
+
+
+##4. Напишите простую программу Python, используя принцип ООП,
+## для выполнения некоторых простых банковских операций, таких как просмотр баланса,
+## внесение денег, снятие денег, отправка денег.
+## При снятие и отправка денег есть комиссия в размере 1% суммы транзакции. После каждой транзакции должен создаваться
+## .txt файл ввиде чека который храниь информацию о транзакции, текущую сумму карты и **время транзакции.
+## Сделайте презентацию программы, загрузите видео в youtube и отправьте ссылку и исходный код в LMS. Удачи!
+
+try:
+
+
+    class Bankomat():
+        def __init__(self,balans = 0.0,):
+            self.balans = balans
+        def vnesti(self):
+            self.vnest = float(input("Введите сумму для депозита:"))
+            self.balans += self.vnest
+            print(f"Внесенная сумма:{self.vnest}")
+
+        def snyat(self):
+            self.snyatt = float(input('Введите сумму для сняте:'))
+            if self.balans > self.snyatt * 1.01:
+                self.balans -= self.snyatt * 1.01
+                print(f"Вы сняли такую сумму: {self.snyatt*1.01}\nКомиссия 1%")
+
+                my_file = open('snyatt.txt', 'w', encoding="utf-8")
+                my_file.write(f'Комиссия 1%" \nВы сняли: {self.snyatt*1.01}\nУ вас осталось {self.balans}')
+                my_file.close()
+
+            else:
+                self.balans -= self.snyatt*1.01
+                print(f"Вам не хватает:{-self.balans}")
+                self.balans += self.snyatt*1.01
+
+        def otp(self,):
+            karta = int(input('Введите Банковский аккаунт получателя карты:' ))
+            self.otpp = float(input('Введите сумму для отправки:'))
+            if self.balans > self.otpp*1.01:
+                self.balans -= self.otpp*1.01
+                print(f"Вы отправили такую сумму:{self.otpp*1.01}\nКомиссия 1% ")
+                my_file = open('otp.txt', 'w', encoding="utf-8")
+                my_file.write(f'Комиссия 1%" \nВы отправили: {self.otpp * 1.01}\nУ вас осталось {self.balans}')
+                my_file.close()
+
+            else:
+                self.balans -= self.otpp*1.01
+                print(f"Вам не хватает: {-self.balans}")
+                self.balans += self.otpp*1.01
+
+
+    a = Bankomat()
+    while True:
+        print("""1.Просмотр баланса
+2.Внесение денег
+3.Снятие денег
+4.Отправка денег
+5.Завершить операцию """)
+        b = int(input(">>:"))
+        if b == 1:
+            print(f"Текущий баланс = {a.balans}")
+
+        elif b == 2:
+            a.vnesti()
+
+        elif b == 3:
+            a.snyat()
+
+        elif b == 4:
+            a.otp()
+
+        elif b == 5:
+            print("Спасибо за выбор банкомат Gdragon")
+            break
+
+        else:
+            continue
+
+except:
+    b = int(input("Ввидите цифру >>:"))
+
+finally:
+    print('Ошибка!')
+
+
+##Практическое задание на тему Exceptions
+##1. Напишите программу, которая получает от пользователя только данные типа int.
+try:
+    numbers = []
+    number = int(input('Ввидете цифру: '))
+    numbers.append(number)
+    print(numbers)
+
+except:
+    print('Ввидите цифру!')
+
+else:
+    print('Вы правильно набрали цифру !')
+
+finally:
+    print('Завершенно!')
+
+##2. Создайте программу, которая получает два числа и делит их.
+try:
+    a = int(input('a: '))
+    b = int(input('b: '))
+    print(a/b)
+
+except:
+    print('Ввидите другю цифру!')
+
+else:
+    print('Вы правильно набрали цифру !')
+
+finally:
+    print('Завершенно!')
