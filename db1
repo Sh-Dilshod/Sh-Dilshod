@@ -1,0 +1,393 @@
+# 1. Доработайте свой предыдущий проект “Банкомат”.
+# В этот раз, вам нужно использовать базы данных, также Коллекции, их будет две.
+# Первая для хранения данных пользователей. Вторая для хранения историй транзакции пользователей.
+# В вашей базе данных пользователей, изначально, должны быть данные нескольких пользователей, которые включают в себя:
+# имя, фамилия, номер карты, пин-код, баланс карты;
+# также должна пристутствовать функция создания пользователя и добавления в базу данных прямо с баномата.
+# Все транзакции записываются в базу данных.
+# Лог транзакции включает в себя имя и фамилию пользователя, сумма транзакции и дату.
+
+
+# from pymongo import MongoClient
+#
+# client = MongoClient("mongodb+srv://gdragon01:dilshod01@cluster0.90tki.mongodb.net/"
+#                      "myFirstDatabase?retryWrites=true&w=majority")
+# db = client["my_db"]
+# collections1 = db["my_collection"]
+# collections2 = db["my_collection1"]
+# while True:
+#     class ATM():
+#
+#         def registration(self):
+#
+#             name = input("name:")
+#             surname = input("surname:")
+#             bank_card = int(input("bank_card:"))
+#             pin_cod = int(input("pin_cod:"))
+#             balance = int(input("balance:"))
+#             a1 = [
+#                 {
+#                    "name": name,
+#                    "surname": surname,
+#                    "bank_card": bank_card,
+#                    "pin_cod": pin_cod,
+#                    "balance": balance
+#                 }
+#                 ]
+#             if collections1.count_documents({"bank_card": bank_card}) == 0:
+#                 collections1.insert_many(a1)
+#
+#         def balancec(self):
+#             a2 = collections1.find_one({"bank_card": bank_card})["balance"]
+#             print(a2)
+#
+#         def vnesti_money(self):
+#             vnesti = float(input("Введите сумму для депозита:"))
+#             t1 = [{
+#                 "name": collections1.find_one({"bank_card": bank_card})["name"],
+#                 "surname": collections1.find_one({"bank_card": bank_card})["surname"],
+#                 "карта": bank_card,
+#                 "Внесенная сумма:": vnesti,
+#             }]
+#             collections2.insert_many(t1)
+#             balance123 = collections1.find_one({"bank_card": bank_card})["balance"]
+#             collections1.update_many({'bank_card': bank_card}, {"$set": {"balance": balance123 + vnesti}})
+#
+#             print(f"Внесенная сумма:{vnesti}")
+#
+#         def cash_snyatt(self):
+#             snyatt = float(input("Введите сумму вывода:"))
+#             print("Комиссия 1%")
+#
+#             if collections1.find_one({"bank_card": bank_card})["balance"] >= snyatt*1.01:
+#                 a2 = [{
+#                          "name": collections1.find_one({"bank_card": bank_card})["name"],
+#                          "surname": collections1.find_one({"bank_card": bank_card})["surname"],
+#                          "карта": bank_card,
+#                          "вы сняли:": snyatt,
+#                     }]
+#                 collections2.insert_many(a2)
+#                 balance2 = collections1.find_one({"bank_card": bank_card})["balance"]
+#                 collections1.update_many({'bank_card': bank_card}, {"$set": {"balance": balance2 - snyatt*1.01}})
+#                 print(f"Вы сняли:{snyatt*1.01}")
+#
+#             else:
+#                 print("Не хватает денег!!!")
+#
+#         def otpp_money(self):
+#             karta = int(input("Введите Банковский аккаунт получателя карты:"))
+#             otpp = float(input("Введите сумму отправки:"))
+#             print("Комиссия 1%")
+#             if collections1.find_one({"bank_card": bank_card})["balance"] >= otpp * 1.01:
+#                 a3 = [{
+#                     "name": collections1.find_one({"bank_card": bank_card})["name"],
+#                     "surname": collections1.find_one({"bank_card": bank_card})["surname"],
+#                     "karta": bank_card,
+#                     "карта получателя": karta,
+#                     "вы отправили :": otpp
+#                     }]
+#                 collections2.insert_many(a3)
+#                 balance2 = collections1.find_one({"bank_card": bank_card})["balance"]
+#                 balance3 = collections1.find_one({"bank_card": karta})["balance"]
+#                 collections1.update_many({'bank_card': bank_card}, {"$set": {"balance": balance2 - otpp * 1.01}})
+#                 collections1.update_many({'bank_card': karta}, {"$set": {"balance": balance3 + otpp}})
+#
+#             else:
+#                 print("Не хватает денег!!!")
+#
+#         def delete(self):
+#             collections1.delete_many({})
+#             collections2.delete_many({})
+#
+#
+#     a = ATM()
+#
+#
+#     print("Добро пожаловать в банкомат Академии")
+#     print("выберите операцию который вы хотите сделать")
+#
+#
+#     while True:
+#         print("""1. регистрация
+# 2. войти в акаунт
+# 3. удалить всё
+#     """)
+#         xx = int(input(":"))
+#         if xx == 1:
+#             a.registration()
+#         elif xx == 2:
+#             bank_card = int(input("karta:"))
+#             password = int(input("pin:"))
+#             if collections1.count_documents({"bank_card": bank_card}) == 1 and collections1.count_documents({"pin_cod": password}) == 1:
+#                 while True:
+#
+#                     print("""1. просмотр баланса
+# 2. внесение денег
+# 3. снятие денег
+# 4. отправка денег
+# 5. Завершить оперaцию""")
+#
+#                     b = int(input("Введите:"))
+#
+#                     if b == 1:
+#                         a.balancec()
+#
+#                     elif b == 2:
+#                         a.vnesti_money()
+#
+#                     elif b == 3:
+#                         a.cash_snyatt()
+#
+#                     elif b == 4:
+#                         a.otpp_money()
+#
+#                     elif b == 5:
+#                         print("Спасибо за выбор банкомат Академии")
+#                         break
+#
+#                     else:
+#                         continue
+#
+#             else:
+#                 continue
+#         elif xx == 3:
+#             a.delete()
+
+# from pymongo import MongoClient
+#
+# client = MongoClient("mongodb+srv://gdragon01:dilshod01@cluster0.pgsyt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+# my_db1 = client["my_db1"]
+#
+# 
+# collectionn1 = my_db1["chek"]
+# collectionn3 = my_db1["notforyou"]
+# collectionn4 = my_db1["products"]
+# collectionn2 = my_db1["users"]
+#
+# collectionn1.delete_many({})
+# collectionn2.delete_many({})
+# collectionn3.delete_many({})
+# collectionn4.delete_many({})
+# aa = [
+#     {
+#         "fullname": "Sh",
+#         "name": "Dilshod",
+#         "Login": 17042001,
+#         "password": 111,
+#         "balance": 0,
+#     }
+# ]
+# collectionn3.insert_many(aa)
+#
+#
+# class OnlineShop:
+#
+#     def welcome(self):
+#         print('Выберите операцию которую вы хотите сделать:')
+#         print('1. Просмотр баланса')
+#         print('2. Пополнить баланс')
+#         print('3. Начать покупку')
+#         print('4. Корзина')
+#         print('5. Очистить корзину')
+#         print('0. выход')
+#
+#     def registration(self):
+#         fullname = str(input('Введите имя и фамилию:'))
+#         login = str(input('Введите логин:'))
+#         password = str(input('Введите пароль:'))
+#         user = [
+#             {
+#                 'Fullname': fullname,
+#                 'Login': login,
+#                 'Password': password,
+#                 'Balance': 0
+#             }
+#         ]
+#         collectionn2.insert_many(user)
+#         print('Запись успешно зарегестрированна!')
+#
+#     def sign_in(self):
+#         Login1 = str(input('Введите логин:'))
+#         Password1 = str(input('Введите пароль:'))
+#         if collectionn2.count_documents({"Login": Login1}) == 1 and collectionn2.count_documents(
+#                 {"Password": Password1}) == 1:
+#             while True:
+#                 t.welcome()
+#                 opetarion = int(input(':'))
+#                 xxx1 = collectionn2.find_one({"Login": Login1})["Balance"]
+#                 if opetarion == 1:
+#                     print('Ваш баланс', xxx1)
+#                 elif opetarion == 2:
+#                     deposit = int(input('Введите сумму пополнения:'))
+#                     collectionn2.update_one({"Login": Login1}, {'$inc': {"Balance": deposit}})
+#                     print('Баланс успешно пополнен!')
+#                 elif opetarion == 3:
+#                     print('Выберите товар:')
+#                     while True:
+#                         for x in collectionn4.find():
+#                             print('id:', x['_id'], ',', 'Название:', x['Product'], ',', 'количество:', x['Quantity'],
+#                                   ',', 'Цена:', x['Prise'])
+#                         chose_product = int(input('Выберите id товара: '))
+#                         if collectionn4.count_documents({'_id': chose_product}) == 0:
+#                             print('Такого товара не существует!')
+#                             break
+#                         else:
+#                             price = collectionn4.find_one({'_id': chose_product})['Prise']
+#                             name_product = collectionn4.find_one({'_id': chose_product})['Product']
+#                             quantity = int(input('Количество:'))
+#                             over_all = quantity * price
+#                             xxx = collectionn2.find_one({"Login": Login1})["Balance"]
+#                             rrr = collectionn4.find_one({'_id': chose_product})['Quantity']
+#                             if over_all > xxx and quantity < rrr:
+#                                 print('Недостаточно средств!')
+#                                 break
+#                             else:
+#                                 collectionn2.update_one({"Login": Login1}, {'$inc': {"Balance": -over_all}})
+#                                 collectionn4.update_one({"_id": chose_product}, {'$inc': {"Quantity": -quantity}})
+#
+#
+#                                 check_list = [
+#                                     {
+#                                         'Product': name_product,
+#                                         'Quantity': quantity,
+#                                         'Prise': over_all,
+#                                     }
+#                                 ]
+#                                 collectionn1.insert_many(check_list)
+#                                 print("Успешно добавлено в корзину!")
+#                                 return
+#                 elif opetarion == 4:
+#
+#                     for zz in collectionn1.find():
+#                         print('Название:', zz['Product'], ',', 'Количество:', zz['Quantity'], ',', 'Цена:', zz['Prise'],
+#                               ',', 'Цена:', zz['Prise'])
+#                 elif opetarion == 5:
+#                     collectionn1.delete_many({})
+#                 elif opetarion == 0:
+#                     break
+#
+#         else:
+#             print('Такой записи не существует, зарегестрируйтесь!')
+#
+#     def sign_in_how_admin(self):
+#         Login_admin = int(input('Введите логин:'))
+#         Password_admin1 = int(input('Введите пароль:'))
+#         if collectionn3.find_one()['Login'] == Login_admin and collectionn3.find_one()['password'] == Password_admin1:
+#             while True:
+#                 print('Выберите функцию которую вы хотите сделать:')
+#                 print('1. Изменить данные пользователя')
+#                 print('2. Удалить данные пользователя')
+#                 print('3. Добавление продукта')
+#                 print('4. Изменить данные продукта')
+#                 print('5. Удалить данные продукта')
+#                 print('6. Удаление всех данных')
+#                 print('7. добавит количество продукта')
+#                 print('0. Выход')
+#                 chose = int(input('Выберите операцию которую вы хотите сделать:'))
+#                 if chose == 1:
+#                     login_user = (input('Введите логин:'))
+#                     password_user = (input('Введите пароль:'))
+#                     print('Выберите что вы хотите изменить:')
+#                     print('1. Логин')
+#                     print('2. Пароль')
+#                     ch = int(input(':'))
+#                     if ch == 1:
+#                         if collectionn2.count_documents({"Login": login_user}) == 0 and collectionn2.count_documents(
+#                                 {"Password": password_user}) == 0:
+#                             print('Такой записи не существует!')
+#                         else:
+#                             new_login = input('Введите новый логин:')
+#                             collectionn2.update_one({'Password': password_user}, {'$set': {'Login': new_login}})
+#                             print('Учетная запись успешно изменена!')
+#                     elif ch == 2:
+#                         if collectionn2.count_documents({"Login": login_user}) == 0 and collectionn2.count_documents(
+#                                 {"Password": password_user}) == 0:
+#                             print('Такой записи не существует!')
+#                         else:
+#                             new_password = input('Введите новый пароль:')
+#                             collectionn2.update_one({'Login': login_user}, {'$set': {'Password': new_password}})
+#                             print('Учетная запись успешно изменена!')
+#                 elif chose == 2:
+#                     login_user = (input('Введите логин:'))
+#                     password_user = (input('Введите пароль:'))
+#                     if collectionn2.count_documents({"Login": login_user}) == 0 and collectionn2.count_documents(
+#                             {"Password": password_user}) == 0:
+#                         print('Такой записи не существует!')
+#                     else:
+#                         collectionn2.delete_one({'Login': login_user, 'Password': password_user})
+#                         print('Учетная запись успешно удалена!')
+#                 elif chose == 3:
+#                     id = int(input('id:'))
+#                     name_product = input('Введите название товара:')
+#                     price = int(input('Цена:'))
+#                     Quantity = int(input("количество"))
+#                     product = [
+#                         {
+#                             '_id': id,
+#                             'Product': name_product,
+#                             'Prise': price,
+#                             'Quantity': Quantity,
+#                         }
+#                     ]
+#                     if collectionn4.count_documents({'_id': id}) == 0:
+#                         collectionn4.insert_many(product)
+#                         print('Товар успешно добавлен!')
+#                     else:
+#                         print("такой id уже существует  ")
+#                 elif chose == 4:
+#                     find_id = int(input('Введите ID товара: '))
+#                     if collectionn4.count_documents({'_id': find_id}) == 1:
+#                         print('Что вы хотите изменить?')
+#                         print('1. Название продукта')
+#                         print('2. Цену продукта')
+#                         change_point = int(input(':'))
+#                         if change_point == 1:
+#                             new_title = input('Введите новое название товара: ')
+#                             collectionn4.update_many({'_id': find_id}, {'$set': {'Product': new_title}})
+#                             print('Успешно изменено!')
+#                         else:
+#                             new_prise = int(input('Введите новую цену:'))
+#                             collectionn4.update_many({'_id': find_id}, {'$set': {'Prise': new_prise}})
+#                             print('Успешно изменено!')
+#                     else:
+#                         print('Такого продукта не существует!')
+#                         break
+#                 elif chose == 5:
+#                     find_id = int(input('Введите ID товара: '))
+#                     if collectionn4.count_documents({'_id': find_id}) == 1:
+#                         collectionn4.delete_one({'_id': find_id})
+#                         print('Товар успешно удален!')
+#                     else:
+#                         print('Такого товара не существует!')
+#                 elif chose == 6:
+#                     collectionn1.delete_many({})
+#                     collectionn2.delete_many({})
+#                     collectionn4.delete_many({})
+#                     print('Успешно удаленно!')
+#                 elif chose == 7:
+#                     id1 = int(input('id:'))
+#                     Quantity1 = int(input("количество:"))
+#                     if collectionn4.find_one()['_id'] == 0:
+#                         collectionn4.update_one({"_id": id1}, {'$inc': {"Quantity": Quantity1}})
+#                     else:
+#                         print("Такого товара не существует!")
+#                 elif chose == 0:
+#                     return
+#         else:
+#             print('Такой записи не существует!')
+#
+# t = OnlineShop()
+#
+# print('Добро пожаловать!')
+# while True:
+#     print('Выберите операцию которую вы хотите сделать:')
+#     print('1. Регистрация')
+#     print('2. Войти')
+#     print('3. Вход как администратор')
+#     choose = int(input(':'))
+#     if choose == 1:
+#         t.registration()
+#     elif choose == 2:
+#         t.sign_in()
+#     elif choose == 3:
+#         t.sign_in_how_admin()
